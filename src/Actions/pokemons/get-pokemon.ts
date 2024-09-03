@@ -1,3 +1,4 @@
+import { Item } from "react-native-paper/lib/typescript/components/Drawer/Drawer";
 import { pokeApi } from "../../Config/Api/PokeAPI";
 import type { Pokemon } from "../../Domain/Entities/Entities";
 import type { PokeApipaginatedResponse, PokeAPIPokemon } from "../../Infraestructure/Interfaces";
@@ -13,19 +14,20 @@ export const getPokemons = async (page: number, limit: number = 20): Promise<Pok
             }
         });
 
-        const pokemonPromises = data.results.map(info => {
+        const pokemonPromises = data.results.map(info =>{
             return pokeApi.get<PokeAPIPokemon>(info.url);
         });
 
-        const PokeAPIPokemons = await Promise.all(pokemonPromises);
-        const pokemons = PokeAPIPokemons.map(item =>
+        const PokeAPIPokemon = await Promise.all(pokemonPromises);
+        const pokemons = PokeAPIPokemon.map(item=>
             PokemonMapper.pokeApiPokemonToEntity(item.data),
-        );
+        )
 
-        console.log(pokemons[0]);
-        
-        return pokemons;
+        return [];
     } catch (error) {
-        throw new Error('error al obtener la data. '+error)
+        throw new Error('error al obtener la data. ' + error);
     }
-}
+};
+
+
+
