@@ -7,7 +7,7 @@ const queryClient = new QueryClient()
 
 export default function App() {
   return (
-    <QueryClientProvider client={queryClient}> //agilizar la app para las solicitudes http
+    <QueryClientProvider client={queryClient}> 
       <ThemeContextProvider>
         <StackNavigator />
       </ThemeContextProvider>
